@@ -17,7 +17,7 @@
         if ($user && password_verify($password, $user['password'])) {
           $_SESSION['user_id'] = $user['id'];
           $_SESSION['username'] = $user['username'];
-          header("Location: index.php");
+          header("Location: mainPage.php");
           exit;
           } else {
             $error = "Invalid username or password.";
@@ -30,15 +30,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styleLogin.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>Fly från Eko</h1>
-        <a href="index.php">Hem</a>
     </header>
-    <div class="center-flex" id="container">
-		<form action="login.php" method="post">
+    <div id="container">
+		<form action="index.php" method="post">
         <?php if ($error != ""): ?>
             <p><?php echo $error; ?></p>
         <?php endif; ?>
@@ -47,7 +46,7 @@
 			<label for="password">Password:</label>
 			<input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
 			<input type="submit" value="Log in">
-            Don't Have An Account? <a href="createAcc.php">Sign up here!</a>
+            Don't Have An Account? <a href="createAccount.php">Sign up here!</a>
 		</form>
     </div>
 </body>
