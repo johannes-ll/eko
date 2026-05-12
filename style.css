@@ -19,7 +19,8 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: .4rem 2rem;
-    background: #d1c2ff;
+    background: linear-gradient(#d1c2ff, #b1a2de);
+    border-radius: 1rem 1rem 0 0;
 }
 
 input[type="search"] {
@@ -42,6 +43,10 @@ input[type="search"] {
     justify-content: space-between;
 }
 
+.card:last-child {
+    border-radius: 0 0 1rem 1rem;
+}
+
 .card div {
     margin: 1rem 0;
 }
@@ -62,6 +67,10 @@ input[type="search"] {
     align-items: center;
     gap: 1rem;
     font-size: 1.8rem;
+    padding: .4rem 1rem;
+    /* annan look: */
+    /* border-radius: 10rem; */
+    /* background: linear-gradient(#d1c2ff, #b1a2de); */
 }
 
 .weather .temp {
@@ -116,6 +125,11 @@ button {
 
 .list .card:hover {
     background: #ededed;
+    transform: scale(1.01);
+}
+
+.list .card:active {
+    background: #dfdfdf;
 }
 
 .btns {
