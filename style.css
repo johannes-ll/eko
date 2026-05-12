@@ -1,0 +1,56 @@
+body {
+    font-family: sans-serif;
+}
+
+.c {
+    width: 80vw;
+    margin: 10vh auto;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: .4rem;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.activity {
+    background: whitesmoke;
+    padding: .4rem 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.activity div {
+    margin: 1rem;
+}
+
+.activity h2 {
+    margin: 0;
+}
+
+.activity a {
+    display: flex;
+    gap: .6rem;
+    text-decoration: none;
+    color: black;
+}
+
+.weather {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.temp::after {
+    content: "°";
+}
