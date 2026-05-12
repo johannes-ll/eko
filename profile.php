@@ -1,7 +1,7 @@
 <?php
     session_start();
     require 'config.php';
-
+    require 'loggedInCheck.php';
     $isLoggedIn = isset($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
