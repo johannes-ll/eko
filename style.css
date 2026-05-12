@@ -21,7 +21,7 @@ header {
     gap: 2px;
 }
 
-.activity {
+.card {
     background: whitesmoke;
     padding: .4rem 2rem;
     display: flex;
@@ -30,15 +30,15 @@ header {
     justify-content: space-between;
 }
 
-.activity div {
-    margin: 1rem;
+.card div {
+    margin: 1rem 0;
 }
 
-.activity h2 {
+.card h2 {
     margin: 0;
 }
 
-.activity a {
+.card a {
     display: flex;
     gap: .6rem;
     text-decoration: none;
@@ -53,4 +53,43 @@ header {
 
 .temp::after {
     content: "°";
+}
+
+.banner {
+    /* bakgrund kan vara beroende på kategori eller bestämd av användare */
+    /* kan också vara karta på området? */
+    background-image: url("https://www.teamsportia.se/wp-content/uploads/2017/05/fotboll1.png");
+    background-size: contain;
+    display: flex;  
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.banner a {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.banner h1 {
+    /* justera margin-top för att bestämma height på banner (skevt) */
+    margin-top: 15vh;
+    margin-bottom: 0;
+    color: white;
+}
+
+button {
+    padding: 1rem 2rem;
+    background: whitesmoke;
+    border-radius: 0;
+    border: 1px solid rgb(198, 198, 198);
+}
+
+.list .card {
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.list .card:hover {
+    background: #ededed;
 }

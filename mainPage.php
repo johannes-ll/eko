@@ -16,7 +16,7 @@
             </div>
         </header>
         <div class="list">
-            <div class="activity">
+            <div class="card">
                 <div>
                     <h2>Activity name</h2>
                     <a href=""><span>adress</span>20 going</a>
@@ -30,21 +30,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Vad som ska finnas med i aktiviteter:
-        // Plats, medlemmar, skapare av aktivitet, väder
-        // Väder vill vi uppdatera om de inte uppdaterats på ett tag.
-        // Användare frågar om alla aktiviteter -> frågar om info om specifik aktivitet
-        // Vi lagrar temperatur med tidsstämpel, om det gått en timme från senaste uppdatering så uppdaterar vi info med nytt väder innan vi ger tillbaka till användare
-
-        let activities = [
-            {id:1, name:"activity", creatorid:1, loc:"Adress", members:"referns till lista", weather:{temp:20, condition:"sunny"}}
-        ]
-
-        function update_list {
-
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
