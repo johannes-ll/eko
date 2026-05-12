@@ -1,18 +1,25 @@
 body {
     font-family: sans-serif;
+    /* background: rgb(223, 223, 235); */
+    background-color: #e5e5f7;
+    background-image:  radial-gradient(#444cf7 0.30000000000000004px, transparent 0.30000000000000004px), radial-gradient(#444cf7 0.30000000000000004px, #e5e5f7 0.30000000000000004px);
+    background-size: 12px 12px;
+    background-position: 0 0,6px 6px;
 }
 
 .c {
     width: 80vw;
     margin: 10vh auto;
+    /* border: 2px #afafd2 solid; */
 }
 
 header {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
-    padding: .4rem;
+    padding: .4rem 2rem;
+    background: #d1c2ff;
 }
 
 .list {
@@ -49,10 +56,20 @@ header {
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-size: 1.8rem;
+}
+
+.weather .temp {
+    margin: 0;
 }
 
 .temp::after {
     content: "°";
+}
+
+.activity .content{
+    background-color: #ffffff;
+    padding: 1rem;
 }
 
 .banner {
@@ -69,6 +86,8 @@ header {
 .banner a {
     font-size: 2rem;
     font-weight: 600;
+    color: black;
+    text-decoration: none;
 }
 
 .banner h1 {
@@ -92,4 +111,18 @@ button {
 
 .list .card:hover {
     background: #ededed;
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+.btns * {
+    transition: 200ms;
+}
+
+.btns *:hover {
+    background: rgb(198, 198, 198);;
 }

@@ -123,6 +123,7 @@ function createActivityCard(activity) {
 }
 
 function update_list() {
+    document.querySelector("header").style.display = "flex"
     const list = document.querySelector(".list")
     list.replaceChildren()
 
@@ -135,6 +136,8 @@ function update_list() {
 update_list()
 
 function show_activity(id) {
+
+    document.querySelector("header").style.display = "none"
     const activity = activities.find(item => item.id === id)
     const list = document.querySelector(".list")
 
@@ -162,6 +165,9 @@ function show_activity(id) {
     banner.appendChild(temp)
     banner.appendChild(title)
 
+    const content = document.createElement("div")
+    content.className="content"
+
     const members = document.createElement("h2")
     members.textContent = `${activity.members} members going`
 
@@ -181,13 +187,18 @@ function show_activity(id) {
     backButton.textContent = "Tillbaka"
     backButton.addEventListener("click", update_list)
 
+    const buttondiv = document.createElement("div")
+    buttondiv.className = "btns"
+    buttondiv.appendChild(button)
+    buttondiv.appendChild(backButton)
+
     activityDiv.appendChild(banner)
-    activityDiv.appendChild(members)
-    activityDiv.appendChild(location)
-    activityDiv.appendChild(creator)
-    activityDiv.appendChild(description)
-    activityDiv.appendChild(button)
-    activityDiv.appendChild(backButton)
+    content.appendChild(members)
+    content.appendChild(location)
+    content.appendChild(creator)
+    content.appendChild(description)
+    content.appendChild(buttondiv)
+    activityDiv.appendChild(content)
 
     list.replaceChildren(activityDiv)
 }
