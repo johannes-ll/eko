@@ -122,12 +122,15 @@ function createActivityCard(activity) {
     return activityDiv
 }
 
-function update_list() {
+function update_list(a) {
     document.querySelector("header").style.display = "flex"
     const list = document.querySelector(".list")
     list.replaceChildren()
 
-    activities.forEach(activity => {
+    if (!a)
+        a = activities
+
+    a.forEach(activity => {
         const card = createActivityCard(activity)
         list.appendChild(card)
     })
@@ -185,7 +188,7 @@ function show_activity(id) {
 
     const backButton = document.createElement("button")
     backButton.textContent = "Tillbaka"
-    backButton.addEventListener("click", update_list)
+    backButton.addEventListener("click", () => update_list())
 
     const buttondiv = document.createElement("div")
     buttondiv.className = "btns"
@@ -202,3 +205,17 @@ function show_activity(id) {
 
     list.replaceChildren(activityDiv)
 }
+
+// eventlistnerer för vår sök
+// vi vill söka efter varje input, köra update_list() med vår filtrerade lista
+document.querySelector("#search").addEventListener("input", (e) => {
+    const searchText = e.target.value.toLowerCase().trim()
+
+    const filteredActivities = activities.filter(activity => {
+        return activity.name.toLowerCase().includes(searchText) ||
+               activity.loc.toLowerCase().includes(searchText) ||
+               activity.desc.toLowerCase().includes(searchText)
+    })
+
+    update_list(filteredActivities)
+})

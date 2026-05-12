@@ -11,8 +11,8 @@
         <header>
             <h1>Fly Från Eko</h1>
             <div>
-                <input type="search" name="" id="">
                 <a href="">Skapa</a>
+                <input type="search" name="" id="search" placeholder="Sök efter aktivteter...">
             </div>
         </header>
         <div class="list">

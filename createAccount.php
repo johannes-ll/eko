@@ -45,28 +45,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <header>
-        <h1>Fly från Eko</h1>
-    </header>
-
-    <div id="container">
-		<form action="createAccount.php" method="post">
-            <?php if ($error != ""): ?>
-                <p><?php echo $error; ?></p>
-            <?php endif; ?>
-			<label for="username">Username:</label>
-			<input type="text" name="username" id="username" placeholder="Enter you prefered username" required minlength="4">
-			<label for="email">E-mail:</label>
-			<input type="email" name="email" id="email" placeholder="john@smith.com" required>
-			<label for="password">Password:</label>
-			<input type="password" name="password" id="password" placeholder="Enter a password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
-            <label for="confirm_password">Confirm Password:</label>
-			<input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
-			<input type="submit" value="Sign up">
-             Already Have An Account?<a href="index.php"> Log in here!</a>
-		</form>
+    <div class="c">
+        <header>
+            <h1>Fly från Eko</h1>
+        </header>
+    
+        <div id="container" class="content">
+            <form action="createAccount.php" method="post">
+                <?php if ($error != ""): ?>
+                    <p><?php echo $error; ?></p>
+                <?php endif; ?>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" placeholder="Enter you prefered username" required minlength="4">
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" placeholder="john@smith.com" required>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" placeholder="Enter a password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
+                <input type="submit" value="Sign up">
+                 Already Have An Account?<a href="index.php"> Log in here!</a>
+            </form>
+        </div>
     </div>
 </body>
 </html>
