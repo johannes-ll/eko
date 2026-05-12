@@ -9,14 +9,14 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
           
-        $stmt = $pdo->prepare("SELECT * FROM User WHERE Username = :username");
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
           
-        if ($user && password_verify($password, $user['Password'])) {
-          $_SESSION['user_id'] = $user['Id'];
-          $_SESSION['username'] = $user['Username'];
+        if ($user && password_verify($password, $user['password'])) {
+          $_SESSION['user_id'] = $user['id'];
+          $_SESSION['username'] = $user['username'];
           header("Location: index.php");
           exit;
           } else {
@@ -34,7 +34,7 @@
 </head>
 <body>
     <header>
-        <h1>Eventutskottet</h1>
+        <h1>Fly från Eko</h1>
         <a href="index.php">Hem</a>
     </header>
     <div class="center-flex" id="container">
