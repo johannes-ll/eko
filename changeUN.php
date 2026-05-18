@@ -6,7 +6,7 @@
         $newUsername = $_POST['Username'];
         $userId = $_SESSION['user_id'];
 
-        $stmt = $pdo->prepare("UPDATE User SET username = :username WHERE id = :id");
+        $stmt = $pdo->prepare("UPDATE User SET username = :username WHERE userID = :id");
         $stmt->bindParam(':username', $newUsername);
         $stmt->bindParam(':id', $userId);
         $stmt->execute();

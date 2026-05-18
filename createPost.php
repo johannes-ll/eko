@@ -29,13 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $latitude = $data[0]['lat'];
         $longitude = $data[0]['lon'];
 
-        $stmt = $pdo->prepare("INSERT INTO Event (title, info, date, time, longitude, latitude, userID) VALUES (:Title, :Info, :Date, :Time, :Longitude, :Latitude, :UserID)");
+        $stmt = $pdo->prepare("INSERT INTO Event (title, info, date, time, longitude, latitude, adress, userID) VALUES (:Title, :Info, :Date, :Time, :Longitude, :Latitude, :Adress, :UserID)");
         $stmt->bindParam(':Title', $title);
         $stmt->bindParam(':Info', $info);
         $stmt->bindParam(':Date', $date);
         $stmt->bindParam(':Time', $time);
         $stmt->bindParam(':Longitude', $longitude);
         $stmt->bindParam(':Latitude', $latitude);
+        $stmt->bindParam(':Adress', $adress);
         $stmt->bindParam(':UserID', $_SESSION['user_id']);
         $stmt->execute();
         header("Location: mainPage.php");

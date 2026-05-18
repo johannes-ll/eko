@@ -8,7 +8,7 @@
 
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-        $stmt = $pdo->prepare("UPDATE User SET password = :password WHERE id = :id");
+        $stmt = $pdo->prepare("UPDATE User SET password = :password WHERE userID = :id");
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':id', $userId);
         $stmt->execute();
