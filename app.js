@@ -190,10 +190,26 @@ function show_activity(id) {
     backButton.textContent = "Tillbaka"
     backButton.addEventListener("click", () => update_list())
 
+    
+    
     const buttondiv = document.createElement("div")
     buttondiv.className = "btns"
     buttondiv.appendChild(button)
     buttondiv.appendChild(backButton)
+
+
+    fetch(`get_delete_button.php?authorId=${activity.creatorid}`)
+        .then(response => response.text())
+        .then(html => {
+
+            if (html.trim() !== "") {
+
+                const wrapper = document.createElement("div")
+                wrapper.innerHTML = html
+
+                buttondiv.appendChild(wrapper.firstElementChild)
+            }
+        })
 
     activityDiv.appendChild(banner)
     content.appendChild(members)
