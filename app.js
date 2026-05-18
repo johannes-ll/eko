@@ -106,23 +106,7 @@ function createActivityCard(activity) {
 
     infoDiv.appendChild(title)
     infoDiv.appendChild(link)
-
-    const weatherDiv = document.createElement("div")
-    weatherDiv.className = "weather"
-
-    const emoji = document.createElement("span")
-    emoji.className = "weather-icon"
-    emoji.textContent = getWeatherEmoji(activity.weather.condition)
-
-    const temp = document.createElement("p")
-    temp.className = "temp"
-    temp.textContent = `${activity.weather.temp}`
-
-    weatherDiv.appendChild(emoji)
-    weatherDiv.appendChild(temp)
-
     activityDiv.appendChild(infoDiv)
-    activityDiv.appendChild(weatherDiv)
 
     return activityDiv
 }
@@ -169,10 +153,9 @@ function show_activity(id) {
     .then(r => r.json())
     .then(data => {
 
-        temp.textContent = `${getWeatherEmoji(data.code)} ${data.temp}°C`
+        temp.textContent = `${getWeatherEmoji(data.code)} ${data.temp}C`
 
     })
-    // temp.textContent = `${getWeatherEmoji(activity.weather.condition)} ${activity.weather.temp}`
 
     const title = document.createElement("h1")
     title.textContent = activity.name
@@ -202,8 +185,6 @@ function show_activity(id) {
     backButton.textContent = "Tillbaka"
     backButton.addEventListener("click", () => update_list())
 
-    
-    
     const buttondiv = document.createElement("div")
     buttondiv.className = "btns"
     buttondiv.appendChild(button)
