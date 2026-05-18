@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'loggedInCheck.php';
-
+require 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -38,6 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':Latitude', $latitude);
         $stmt->bindParam(':UserID', $_SESSION['user_id']);
         $stmt->execute();
+        header("Location: mainPage.php");
+        exit;
     }
     else {
     echo "Kunde inte hitta adressen, försök vara mer specifik (t.ex. lägg till ', Uppsala').";}

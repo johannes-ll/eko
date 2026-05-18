@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'loggedInCheck.php';
+require 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
