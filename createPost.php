@@ -43,6 +43,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Kunde inte hitta adressen, försök vara mer specifik (t.ex. lägg till ', Uppsala').";}
 } else {
     echo "Någpot gick fel, försök igen.";}
+
+/* Kod för hur du hämtar ut data från databasen, använd denna i mainPage.php när du ska visa eventen.
+    $query = "SELECT * FROM Event";
+    $content = $pdo->prepare($query);
+    $content->execute();
+    while($row = $content->fetch(PDO::FETCH_ASSOC)) {
+        echo $row['title'] . " " . $row['info'] . " " . $row['date'] . " " . $row['time'] . " " . $row['longitude'] . " " . $row['latitude'] . "<br>";
+    }
+    */
 ?>
 <doctype html>
 <html lang="en">
