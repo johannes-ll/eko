@@ -52,26 +52,31 @@ let activities = [
     }
 ]
 
-function getWeatherEmoji(condition) {
-    switch (condition) {
-        case "sunny":
-            return "☀️"
-        case "partly_cloudy":
-            return "🌤️"
-        case "cloudy":
-            return "☁️"
-        case "rainy":
-            return "🌧️"
-        case "storm":
-            return "⛈️"
-        case "snowy":
-            return "🌨️"
-        case "foggy":
-            return "🌫️"
-        case "windy":
-            return "💨"
-        default:
-            return "🌍"
+function getWeatherEmoji(code) {
+    switch (code) {
+        case 1: return "☀️"
+        case 2:
+        case 3: return "🌤️"
+        case 4:
+        case 5:
+        case 6: return "☁️"
+        case 7:
+        case 8:
+        case 9:
+        case 10: return "🌫️"
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17: return "🌧️"
+        case 18:
+        case 19:
+        case 20:
+        case 21: return "🌨️"
+        case 27: return "⛈️"
+        default: return "🌍"
     }
 }
 
@@ -160,7 +165,14 @@ function show_activity(id) {
     const temp = document.createElement("a")
     temp.className = "temp"
     temp.href = ""
-    temp.textContent = `${getWeatherEmoji(activity.weather.condition)} ${activity.weather.temp}`
+    fetch("getWeather.php?lat=59.8&lon=17.6&time=2026-05-18T15:00:00")
+    .then(r => r.json())
+    .then(data => {
+
+        temp.textContent = `${getWeatherEmoji(data.code)} ${data.temp}°C`
+
+    })
+    // temp.textContent = `${getWeatherEmoji(activity.weather.condition)} ${activity.weather.temp}`
 
     const title = document.createElement("h1")
     title.textContent = activity.name
