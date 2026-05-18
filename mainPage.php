@@ -23,6 +23,8 @@ require 'loggedInCheck.php';
         </header>
         <div class="list">
             <div class="card">
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <?php endif; ?>
                 <div>
                     <h2>Activity name</h2>
                     <a href=""><span>adress</span>20 going</a>

@@ -30,6 +30,7 @@
             if ($stmt->execute()) {
                 $_SESSION['user_id'] = $pdo->lastInsertId();
                 $_SESSION['username'] = $username;
+                $_SESSION['role'] = $user['role'];
                 header("Location: mainPage.php");
                 exit;
             } else {
