@@ -17,10 +17,8 @@
     <header>
         <h1>Fly från Eko</h1>
         <nav>
-        <?php if ($isLoggedIn): ?>
             <a href="logout.php"> <br> Logga ut </a>
             <a href="mainPage.php">Till startsidan</a>
-        <?php endif; ?>
         </nav>
     </header>
      <div>

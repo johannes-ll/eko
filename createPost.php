@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $time = $_POST["time"];
     $adress = $_POST["adress"];
 
-    $safeAddress = urlencode($address);
+    $safeAddress = urlencode($adress);
 
     $url = "https://nominatim.openstreetmap.org/search?q={$safeAddress}&format=json&limit=1";
 
@@ -41,17 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     else {
     echo "Kunde inte hitta adressen, försök vara mer specifik (t.ex. lägg till ', Uppsala').";}
-} else {
-    echo "Någpot gick fel, försök igen.";}
-
-/* Kod för hur du hämtar ut data från databasen, använd denna i mainPage.php när du ska visa eventen.
-    $query = "SELECT * FROM Event";
-    $content = $pdo->prepare($query);
-    $content->execute();
-    while($row = $content->fetch(PDO::FETCH_ASSOC)) {
-        echo $row['title'] . " " . $row['info'] . " " . $row['date'] . " " . $row['time'] . " " . $row['longitude'] . " " . $row['latitude'] . "<br>";
-    }
-    */
+}
 ?>
 <doctype html>
 <html lang="en">
@@ -60,8 +50,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fly från Eko</title>
     <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
+        <header>
+        <h1>Fly från Eko</h1>
+        <nav>
+            <a href="mainPage.php">Till startsidan</a>
+        </nav>
+    </header>
+    <div id="container" class="content">
     <form action="createPost.php" method="post">
         <label for="title">Titel:</label>
         <input type="text" name="title" placeholder="Tite på ditt event" id="title" required>
@@ -70,15 +68,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <textarea name="info" id="info" placeholder="Beskriv ditt event" required></textarea>
         
         <label for="date">Date:</label>
-        <input type="date" name="date" id="date" required>
+        <input type="text" name="date" id="date" placeholder="yymmdd" required>
         
         <label for="time">Time:</label>
-        <input type="time" name="time" id="time" required>
+        <input type="string" name="time" id="time" placeholder="00:00"required>
         
         <label for="adres">Adress:</label>
-        <input type="text" name="adress" id="adress" required>
+        <input type="text" name="adress" id="adress" placeholder="Ex Studentvägen 1, Uppsala"required>
 
         <input type="submit" value="Create Post">
     </form>
+    </div>
 </body>
 </html>

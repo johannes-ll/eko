@@ -17,7 +17,7 @@ require 'loggedInCheck.php';
             <h1>Fly Från Eko</h1>
             
             <div>
-                <a href="">Skapa</a>
+                <a href="createPost.php">Skapa</a>
                 <input type="search" name="" id="search" placeholder="Sök efter aktivteter...">
             </div>
         </header>
