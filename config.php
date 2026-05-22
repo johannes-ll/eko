@@ -1,4 +1,6 @@
 <?php
+/*Skapar en PDO-anslutning till SQLite-databasen. Denna anslutning används i hela applikationen för att utföra databasoperationer. 
+Om anslutningen misslyckas, kommer ett felmeddelande att visas och skriptet kommer att avslutas.*/
       $db_file = 'FlyEko.db';
       
       try {

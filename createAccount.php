@@ -1,4 +1,5 @@
 <?php
+/*Hanterar skapande av konto. */
     session_start();
     require 'config.php';
 
@@ -53,7 +54,7 @@
         <header>
             <h1>Fly från Eko</h1>
         </header>
-    
+    <!-- Formulär för att skapa en användare -->
         <div id="container" class="content">
             <form action="createAccount.php" method="post">
                 <?php if ($error != ""): ?>

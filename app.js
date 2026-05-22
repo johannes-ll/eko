@@ -168,8 +168,7 @@ async function show_activity(id) {
     const button = document.createElement("button")
     button.textContent = "Gå med i aktivitet!"
     button.onclick = () => {
-        // MAYA KOD HÄR
-        console.log("test")
+      window.location.href = `saveParticipants.php?id=${activity.eventID}`;
     }
 
     const backButton = document.createElement("button")

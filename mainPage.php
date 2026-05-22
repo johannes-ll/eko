@@ -40,7 +40,7 @@ require 'config.php';
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="app.js?v=2"></script>
     <script src="map.js"></script>
 </body>
 </html>

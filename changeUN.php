@@ -1,4 +1,5 @@
 <?php
+/*Hanterar ändring av användarnamn. Användaren måste vara inloggad för att kunna ändra sitt användarnamn.*/
     session_start();
     require 'config.php';
 

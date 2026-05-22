@@ -1,4 +1,5 @@
 <?php
+/*Hanterar inloggning av användare. */
     session_start();
     require 'config.php';
 

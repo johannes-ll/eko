@@ -1,4 +1,5 @@
 <?php
+/*Hanterar skapande av event. Användaren måste vara inloggad för att kunna skapa ett event.*/
 session_start();
 require 'loggedInCheck.php';
 require 'config.php';
@@ -10,7 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = $_POST["date"];
     $time = $_POST["time"];
     $adress = $_POST["adress"];
-
+/*För att få latitud och longitud från adressen, används Nominatim API från OpenStreetMap. Adressen kodas först för att säkerställa att den är korrekt formaterad för URL:en. 
+Sedan görs en HTTP-förfrågan till API:et, och svaret dekodas från JSON-format. Om adressen hittas skapas latitud och longitud som sedan används  i SQL-frågan för att skapa det nya eventet i databasen.
+Om adressen inte hittas, visas ett felmeddelande.*/
     $safeAddress = urlencode($adress);
 
     $url = "https://nominatim.openstreetmap.org/search?q={$safeAddress}&format=json&limit=1";
@@ -62,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="mainPage.php">Till startsidan</a>
         </nav>
     </header>
+    <!-- Formulär för att skapa ett event -->
     <div id="container" class="content">
     <form action="createPost.php" method="post">
         <label for="title">Titel:</label>
