@@ -52,6 +52,15 @@ let activities = [
     }
 ]
 
+async function getEvents() {
+    const response = await fetch("getEvents.php")
+    const data = await response.json()
+
+    return data
+}
+
+getEvents()
+
 function getWeatherEmoji(code) {
     switch (code) {
         case 1: return "☀️"
@@ -91,13 +100,13 @@ function createActivityCard(activity) {
     const infoDiv = document.createElement("div")
 
     const title = document.createElement("h2")
-    title.textContent = activity.name
+    title.textContent = activity.title
 
     const link = document.createElement("a");
     link.href = ""
 
     const addressSpan = document.createElement("span")
-    addressSpan.textContent = activity.loc + " "
+    addressSpan.textContent = activity.adress + " "
 
     const goingText = document.createTextNode(`${activity.members} going`)
 
@@ -111,13 +120,18 @@ function createActivityCard(activity) {
     return activityDiv
 }
 
-function update_list(a) {
+async function update_list(a) {
     document.querySelector("header").style.display = "flex"
+
     const list = document.querySelector(".list")
     list.replaceChildren()
 
-    if (!a)
-        a = activities
+    if (!a) {
+        a = await getEvents()
+        console.log("was undefined")
+    }
+
+    console.log(a)
 
     a.forEach(activity => {
         const card = createActivityCard(activity)
@@ -126,11 +140,14 @@ function update_list(a) {
 }
 
 update_list()
-
-function show_activity(id) {
+async function show_activity(id) {
 
     document.querySelector("header").style.display = "none"
-    const activity = activities.find(item => item.id === id)
+
+    const activities = await getEvents()
+
+    const activity = activities.find(item => item.id == id)
+
     const list = document.querySelector(".list")
 
     if (!activity) {
@@ -149,34 +166,34 @@ function show_activity(id) {
     const temp = document.createElement("a")
     temp.className = "temp"
     temp.href = ""
-    fetch("getWeather.php?lat=59.8&lon=17.6&time=2026-05-18T15:00:00")
-    .then(r => r.json())
-    .then(data => {
 
-        temp.textContent = `${getWeatherEmoji(data.code)} ${data.temp}C`
-
-    })
+    fetch(`getWeather.php?lat=${activity.latitude}&lon=${activity.longitude}&time=${activity.date}T${activity.time}`)
+        .then(r => r.json())
+        .then(data => {
+            console.log(data)
+            temp.textContent = `${getWeatherEmoji(data.code)} ${data.temp}C`
+        })
 
     const title = document.createElement("h1")
-    title.textContent = activity.name
+    title.textContent = activity.title
 
     banner.appendChild(temp)
     banner.appendChild(title)
 
     const content = document.createElement("div")
-    content.className="content"
+    content.className = "content"
 
     const members = document.createElement("h2")
     members.textContent = `${activity.members} members going`
 
     const location = document.createElement("p")
-    location.textContent = `Plats: ${activity.loc}`
+    location.textContent = `Plats: ${activity.adress}`
 
     const creator = document.createElement("p")
-    creator.textContent = `Skapare ID: ${activity.creatorid}`
+    creator.textContent = `Skapare ID: ${activity.userid}`
 
     const description = document.createElement("p")
-    description.textContent = activity.desc
+    description.textContent = activity.info
 
     const button = document.createElement("button")
     button.textContent = "Gå med i aktivitet!"
@@ -187,11 +204,11 @@ function show_activity(id) {
 
     const buttondiv = document.createElement("div")
     buttondiv.className = "btns"
+
     buttondiv.appendChild(button)
     buttondiv.appendChild(backButton)
 
-
-    fetch(`get_delete_button.php?authorId=${activity.creatorid}`)
+    fetch(`get_delete_button.php?authorId=${activity.userid}`)
         .then(response => response.text())
         .then(html => {
 
@@ -205,11 +222,13 @@ function show_activity(id) {
         })
 
     activityDiv.appendChild(banner)
+
     content.appendChild(members)
     content.appendChild(location)
     content.appendChild(creator)
     content.appendChild(description)
     content.appendChild(buttondiv)
+
     activityDiv.appendChild(content)
 
     list.replaceChildren(activityDiv)
