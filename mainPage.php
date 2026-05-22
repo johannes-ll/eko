@@ -10,6 +10,9 @@ require 'config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://api.mazemap.com/js/v2.2.6/mazemap.min.css">
+    <script type='text/javascript' src='https://api.mazemap.com/js/v2.2.6/mazemap.min.js' defer></script>
 </head>
 <body>
     <div class="c">
@@ -38,5 +41,6 @@ require 'config.php';
         </div>
     </div>
     <script src="app.js"></script>
+    <script src="map.js"></script>
 </body>
 </html>
