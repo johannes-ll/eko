@@ -38,12 +38,11 @@
             showDirectionArrows: true
           });
 
-          onMapClick()
+          onMapLoad()
 
-          map.on('click', onMapClick);
         });
 
-        function onMapClick(e) {
+        function onMapLoad() {
           var targetLngLat = {
             lat: 59.8978,
             lng: 17.6333
