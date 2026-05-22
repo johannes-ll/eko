@@ -25,7 +25,7 @@
             container: 'map',
             campuses: 110,
             center: {lng: startLng, lat: startLat},
-            zoom: 17,
+            zoom: 12,
             zLevel: startZ
         });
 
@@ -38,11 +38,16 @@
             showDirectionArrows: true
           });
 
+          onMapClick()
+
           map.on('click', onMapClick);
         });
 
         function onMapClick(e) {
-          var targetLngLat = e.lngLat;
+          var targetLngLat = {
+            lat: 59.8978,
+            lng: 17.6333
+          };
           var targetZ = map.zLevel;
 
           if(currentPopup) {
