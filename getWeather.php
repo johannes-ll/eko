@@ -4,9 +4,9 @@ header('Content-Type: application/json');
 
 $lat = isset($_GET['lat']) ? (float)$_GET['lat'] : null;
 $lon = isset($_GET['lon']) ? (float)$_GET['lon'] : null;
-$time = $_GET['time'] ?? null;
+$time = isset($_GET['time']) ? trim($_GET['time']) : null;
 
-if (!$lat || !$lon) {
+if ($lat === null || $lon === null) {
     echo json_encode(["error" => "Missing lat or lon"]);
     exit;
 }
@@ -30,26 +30,28 @@ if (!isset($data['timeSeries'])) {
 $temp = null;
 $code = null;
 
-$targetTime = null;
+$closestForecast = null;
+$closestDiff = PHP_INT_MAX;
 
-if ($time) {
-    // normalize to SMHI format: YYYY-MM-DDTHH:00:00Z
-    $targetTime = gmdate('Y-m-d\TH:00:00\Z', strtotime($time));
-}
+$targetTime = $time ? strtotime($time) : time();
 
 foreach ($data['timeSeries'] as $forecast) {
 
-    // if time requested, match exact hour
-    if ($targetTime && $forecast['time'] !== $targetTime) {
-        continue;
-    }
+    $forecastTime = strtotime($forecast['time']);
+    if ($forecastTime === false) continue;
 
-    $temp = $forecast['data']['air_temperature'] ?? null;
-    $code = $forecast['data']['symbol_code'] ?? null;
+    $diff = abs($forecastTime - $targetTime);
 
-    if ($targetTime) {
-        break;
+    if ($diff < $closestDiff) {
+        $closestDiff = $diff;
+        $closestForecast = $forecast;
     }
+}
+
+if ($closestForecast !== null) {
+
+    $temp = $closestForecast['data']['air_temperature'] ?? null;
+    $code = $closestForecast['data']['symbol_code'] ?? null;
 }
 
 echo json_encode([

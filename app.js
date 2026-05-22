@@ -167,11 +167,23 @@ async function show_activity(id) {
     temp.className = "temp"
     temp.href = ""
 
-    fetch(`getWeather.php?lat=${activity.latitude}&lon=${activity.longitude}&time=${activity.date}T${activity.time}`)
+    const rawDate = activity.date;   // "260520"
+    const time = activity.time;      // "13:00"
+
+    const day = rawDate.slice(0, 2)
+    const month = rawDate.slice(2, 4)
+    const year = "20" + rawDate.slice(4, 6)
+
+    const isoString = new Date(`${year}-${month}-${day}T${time}:00`).toISOString()
+
+
+    fetch(`getWeather.php?lat=${activity.latitude}&lon=${activity.longitude}&time=${isoString}`)
         .then(r => r.json())
         .then(data => {
             console.log(data)
-            temp.textContent = `${getWeatherEmoji(data.code)} ${data.temp}C`
+
+            temp.textContent =
+                `${getWeatherEmoji(data.code)} ${data.temp}`
         })
 
     const title = document.createElement("h1")
