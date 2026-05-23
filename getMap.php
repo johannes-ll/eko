@@ -21,6 +21,9 @@
       const startLat = 59.859456;
       const startZ = 1;
 
+      const targetLng = 17.64254;
+      const targetLat = 59.85237;
+
         var map = new Mazemap.Map({
             container: 'map',
             campuses: 110,
@@ -33,19 +36,32 @@
         var currentPopup;
 
         map.on('load', function() {
+
           routeDrawer = new Mazemap.AtoBTripBasicDrawer(map, {
             routeLineColorPrimary: '#0099EA', 
             showDirectionArrows: true
           });
 
-          onMapLoad()
+          if (targetLng && targetLat) {
+            var bounds = new Mazemap.LngLatBounds(
+              new Mazemap.LngLat(startLng, startLat), 
+              new Mazemap.LngLat(targetLng, targetLat)
+          );
+
+          map.fitBounds(bounds, {
+            padding: 50,
+            maxZoom: 18,
+            linear: false
+          });
+        }
+          onMapLoad();
 
         });
 
         function onMapLoad() {
           var targetLngLat = {
-            lat: 59.8978,
-            lng: 17.6333
+            lng: targetLng,
+            lat: targetLat
           };
           var targetZ = map.zLevel;
 
