@@ -20,7 +20,7 @@
       const startLng = 17.619748;
       const startLat = 59.859456;
       const startZ = 1;
-
+// förinställda koordinater för event just nu
       const targetLng = 17.64254;
       const targetLat = 59.85237;
 
