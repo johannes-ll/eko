@@ -4,54 +4,6 @@
 // Användare frågar om alla aktiviteter -> frågar om info om specifik aktivitet
 // Vi lagrar temperatur med tidsstämpel, om det gått en timme från senaste uppdatering så uppdaterar vi info med nytt väder innan vi ger tillbaka till användare
 
-let activities = [
-    {
-        id: 1,
-        name: "Picknick i parken",
-        creatorid: 1,
-        loc: "Stadsparken",
-        members: 20,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, fugiat recusandae tenetur at rem quis explicabo eum voluptatum nam fuga porro alias, culpa velit. Dolores voluptatum et quisquam? Nobis ea beatae, vero rerum ex deserunt, debitis adipisci voluptates, illo facilis dolorem nesciunt maiores quod numquam fugiat officiis quasi error eveniet facere. Eaque consequuntur doloribus quisquam eveniet vitae explicabo veniam, voluptate, voluptatum fuga, nisi ducimus cumque eius enim modi laboriosam nam quos dignissimos optio? Id modi tempore aspernatur illo autem voluptates. Nulla delectus iste voluptas nihil deserunt voluptates non, eos temporibus esse commodi dolorem consequuntur beatae error dolores sapiente itaque possimus.",
-        weather: { temp: 20, condition: "sunny" }
-    },
-    {
-        id: 2,
-        name: "Kvällspromenad",
-        creatorid: 2,
-        loc: "Åpromenaden",
-        members: 8,
-        desc:"",
-        weather: { temp: 14, condition: "cloudy" }
-    },
-    {
-        id: 3,
-        name: "Löpning",
-        creatorid: 3,
-        loc: "Elljusspåret",
-        members: 12,
-        desc:"",
-        weather: { temp: 11, condition: "rainy" }
-    },
-    {
-        id: 4,
-        name: "Skridskor",
-        creatorid: 4,
-        loc: "Isbanan",
-        members: 6,
-        desc:"",
-        weather: { temp: -2, condition: "snowy" }
-    },
-    {
-        id: 5,
-        name: "Cykeltur",
-        creatorid: 5,
-        loc: "Gamla Uppsala",
-        members: 10,
-        desc:"",
-        weather: { temp: 17, condition: "windy" }
-    }
-]
-
 async function getEvents() {
     const response = await fetch("getEvents.php")
     const data = await response.json()
@@ -163,6 +115,12 @@ async function show_activity(id) {
     const banner = document.createElement("div")
     banner.className = "banner"
 
+    // const mapdiv = document.createElement("div")
+    // mapdiv.id = "map"
+    // mapdiv.class = "mazemap"
+
+    // banner.appendChild(mapdiv)
+
     const temp = document.createElement("a")
     temp.className = "temp"
     temp.href = ""
@@ -209,6 +167,9 @@ async function show_activity(id) {
 
     const button = document.createElement("button")
     button.textContent = "Gå med i aktivitet!"
+    button.onclick = () => {
+      window.location.href = `saveParticipants.php?id=${activity.id}`;
+    }
 
     const backButton = document.createElement("button")
     backButton.textContent = "Tillbaka"
@@ -244,6 +205,8 @@ async function show_activity(id) {
     activityDiv.appendChild(content)
 
     list.replaceChildren(activityDiv)
+
+    // loadmap()
 }
 
 // eventlistnerer för vår sök
@@ -259,3 +222,75 @@ document.querySelector("#search").addEventListener("input", (e) => {
 
     update_list(filteredActivities)
 })
+
+
+function loadmap() {
+    
+      
+      const startLng = 17.619748;
+      const startLat = 59.859456;
+      const startZ = 1;
+
+        var map = new Mazemap.Map({
+            container: 'map',
+            campuses: 110,
+            center: {lng: startLng, lat: startLat},
+            zoom: 12,
+            zLevel: startZ
+        });
+
+        var routeDrawer;
+        var currentPopup;
+
+        map.on('load', function() {
+          routeDrawer = new Mazemap.AtoBTripBasicDrawer(map, {
+            routeLineColorPrimary: '#0099EA', 
+            showDirectionArrows: true
+          });
+
+          onMapLoad()
+
+        });
+
+        function onMapLoad() {
+          var targetLngLat = {
+            lat: 59.8978,
+            lng: 17.6333
+          };
+          var targetZ = map.zLevel;
+
+          if(currentPopup) {
+            currentPopup.remove();
+          }
+
+          if(routeDrawer) {
+            routeDrawer.clear();
+          }
+
+            var fromString = `${startLng},${startLat},${startZ}`;
+            var toString = `${targetLngLat.lng},${targetLngLat.lat},${targetZ}`;
+
+            const routeParams = {
+              mode: "PEDESTRIAN",
+              campusCollectionTag: "uu",
+              fromLngLatZ: fromString,
+              toLngLatZ: toString,
+              lang: "sv"
+            };
+
+            Mazemap.Data.getAtoBTrip(routeParams)
+            .then(function(trip) {
+              routeDrawer.setAtoBTrip(trip);
+
+            Mazemap.Data.getPoiAt(targetLngLat, targetZ)
+            .then(poi => {
+            var poiName = (poi && poi.properties && poi.properties.name) ? poi.properties.name : "Framme!";
+
+              currentPopup = new Mazemap.Popup()
+              .setLngLat(targetLngLat)
+              .setHTML(`${poiName}`)
+              .addTo(map);
+            });
+        });
+        }
+}

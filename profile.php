@@ -1,4 +1,6 @@
 <?php
+/*Hanterar användarens profil. Den startar en session, inkluderar nödvändiga filer och kontrollerar om användaren är inloggad. 
+Användaren kan ändra sitt användarnamn och lösenord via formulären på sidan. */
     session_start();
     require 'config.php';
     require 'loggedInCheck.php';

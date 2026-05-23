@@ -9,9 +9,11 @@ $userID = $_SESSION['user_id'];
 try {
     $stmt = $pdo->prepare("INSERT INTO EventParticipant (eventID, userID) VALUES (:eventID, :userID)");
     $stmt->execute([':eventID' => $eventID, ':userID' => $userID]);
-    echo "Snyggt! Du är nu anmäld.";
+    header("Location: mainPage.php");
+    exit;
 } catch (PDOException $e) {
-    echo "Du är redan anmäld till detta event!";
+    header("Location: mainPage.php");
+    exit;
 }
 
 /*RÄKNAR UT HUR MÅNGA SOM KOMMER

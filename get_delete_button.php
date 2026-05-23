@@ -1,4 +1,7 @@
 <?php
+/*Hanterar visning av delete-knappen. Endast administratörer och författaren av eventet kan se delete-knappen. För att avgöra detta
+startas en session och användarens roll och ID jämförs med eventets författar-ID som skickas via GET-parametern. 
+Om användaren är admin eller är författaren, visas delete-knappen. Annars visas ingen knapp.*/
 session_start();
 
 $authorId = $_GET['authorId'];

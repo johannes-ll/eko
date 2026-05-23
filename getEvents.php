@@ -1,4 +1,5 @@
 <?php
+/*Hämtar alla event från databasen och räknar ut hur många som kommer att delta i varje event. Resultatet returneras som en JSON-array.*/
 require 'config.php';
 
 $query = "SELECT * FROM Event";

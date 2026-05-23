@@ -1,4 +1,5 @@
 <?php
+/*Hanterar ändring av lösenord. Användaren måste vara inloggad för att kunna ändra sitt lösenord.*/
     session_start();
     require 'config.php';
 
