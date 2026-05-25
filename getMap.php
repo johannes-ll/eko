@@ -16,14 +16,14 @@
     <div id="map" class="mazemap"></div>
 
     <script>
-
+      // start ekonomikum
       const startLng = 17.619748;
       const startLat = 59.859456;
       const startZ = 1;
-// förinställda koordinater för event just nu
+      // slutkoordinater (för event **anpassa dessa**)
       const targetLng = 17.64254;
       const targetLat = 59.85237;
-
+        // initiera Mazemap kartan, 110 är uppsala universitets campus id
         var map = new Mazemap.Map({
             container: 'map',
             campuses: 110,
@@ -34,14 +34,14 @@
 
         var routeDrawer;
         var currentPopup;
-
+        // körs när kartan laddats färdigt
         map.on('load', function() {
-
+          // initiera ruttritaren
           routeDrawer = new Mazemap.AtoBTripBasicDrawer(map, {
             routeLineColorPrimary: '#0099EA', 
             showDirectionArrows: true
           });
-
+          // anpassa zoom till start- och slutkoordinater
           if (targetLng && targetLat) {
             var bounds = new Mazemap.LngLatBounds(
               new Mazemap.LngLat(startLng, startLat), 
@@ -54,10 +54,11 @@
             linear: false
           });
         }
+          // beräkna och rita rutt
           onMapLoad();
 
         });
-
+        // hämta vägbeskrivning, rita rutt samt popup
         function onMapLoad() {
           var targetLngLat = {
             lng: targetLng,
@@ -72,30 +73,30 @@
           if(routeDrawer) {
             routeDrawer.clear();
           }
-
+            // formattera om för att passa Mazemap API
             var fromString = `${startLng},${startLat},${startZ}`;
             var toString = `${targetLngLat.lng},${targetLngLat.lat},${targetZ}`;
-
+            // parametrar för beräkning av rutt
             const routeParams = {
-              mode: "PEDESTRIAN",
-              campusCollectionTag: "uu",
+              mode: "PEDESTRIAN", // prioriterar gång
+              campusCollectionTag: "uu", // uppsala universitets tagg
               fromLngLatZ: fromString,
               toLngLatZ: toString,
               lang: "sv"
             };
-
+            // anropa Mazemap API för att få rutt
             Mazemap.Data.getAtoBTrip(routeParams)
             .then(function(trip) {
               routeDrawer.setAtoBTrip(trip);
-
-            Mazemap.Data.getPoiAt(targetLngLat, targetZ)
-            .then(poi => {
-            var poiName = (poi && poi.properties && poi.properties.name) ? poi.properties.name : "Framme!";
-
-              currentPopup = new Mazemap.Popup()
-              .setLngLat(targetLngLat)
-              .setHTML(`${poiName}`)
-              .addTo(map);
+              // hämta information om destinationsplats
+              Mazemap.Data.getPoiAt(targetLngLat, targetZ)
+              .then(poi => {
+                var poiName = (poi && poi.properties && poi.properties.name) ? poi.properties.name : "Framme!";
+                // skapa och visa popup vid slutkoordinater
+                currentPopup = new Mazemap.Popup()
+                .setLngLat(targetLngLat)
+                .setHTML(`${poiName}`)
+                .addTo(map);
             });
         });
         }
