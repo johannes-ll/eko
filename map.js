@@ -56,7 +56,13 @@ window.setRoute = function(targetLngLat) {
     Mazemap.Data.getAtoBTrip(routeParams)
         .then(function(trip) {
 
-            routeDrawer.setAtoBTrip(trip)
+            routeDrawer.setAtoBTrip(trip);
+
+            map.flyTo({
+                center: targetLngLat,
+                zoom: 17,
+                speed: 1.4
+            });
 
             return Mazemap.Data.getPoiAt(targetLngLat, targetZ)
         })
