@@ -1,10 +1,10 @@
 body {
     font-family: sans-serif;
     /* background: rgb(223, 223, 235); */
-background-color: #e5e5f7;
-opacity: 1;
-background-image:  linear-gradient(#d4d5f9 1px, transparent 1px), linear-gradient(to right, #d4d5f9 1px, #e5e5f7 1px);
-background-size: 20px 20px;
+    background-color: #e5e5f7;
+    opacity: 1;
+    background-image:  linear-gradient(#d4d5f9 1px, transparent 1px), linear-gradient(to right, #d4d5f9 1px, #e5e5f7 1px);
+    background-size: 20px 20px;
 }
 
 .c {
@@ -94,7 +94,9 @@ input[type="search"] {
     display: flex;  
     flex-direction: row-reverse;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 0rem;
+    height: 300px;
+    /* var 2rem  */
 }
 
 .banner a {
@@ -144,4 +146,29 @@ button {
 
 .btns *:hover {
     background: rgb(198, 198, 198);;
+}
+
+.banner * {
+    z-index: 2;
+}
+
+#map {
+    position: absolute;
+    width: 80vw;
+    height: 300px;
+    z-index: 1;
+}
+
+canvas.mapboxgl-canvas {
+    width: 80vw;
+}
+
+.hidden {
+    display: none;
+}
+
+.mapboxgl-control-container,
+.mapboxgl-popup-anchor-top,
+.zlevel-marker {
+    display: none;
 }

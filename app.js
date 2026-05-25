@@ -4,6 +4,12 @@
 // Användare frågar om alla aktiviteter -> frågar om info om specifik aktivitet
 // Vi lagrar temperatur med tidsstämpel, om det gått en timme från senaste uppdatering så uppdaterar vi info med nytt väder innan vi ger tillbaka till användare
 
+
+const mzmap = document.createElement("div")
+mzmap.id = "map"
+mzmap.class = "mazemap"
+document.querySelector(".hidden").appendChild(mzmap)
+
 async function getEvents() {
     const response = await fetch("getEvents.php")
     const data = await response.json()
@@ -115,12 +121,6 @@ async function show_activity(id) {
     const banner = document.createElement("div")
     banner.className = "banner"
 
-    // const mapdiv = document.createElement("div")
-    // mapdiv.id = "map"
-    // mapdiv.class = "mazemap"
-
-    // banner.appendChild(mapdiv)
-
     const temp = document.createElement("a")
     temp.className = "temp"
     temp.href = ""
@@ -194,6 +194,8 @@ async function show_activity(id) {
             }
         })
 
+    document.querySelector(".mapboxgl-canvas").style.width = "80vw"
+    banner.appendChild(mzmap)
     activityDiv.appendChild(banner)
 
     content.appendChild(members)
@@ -206,91 +208,19 @@ async function show_activity(id) {
 
     list.replaceChildren(activityDiv)
 
-    // loadmap()
-}
 
+    
+}
 // eventlistnerer för vår sök
 // vi vill söka efter varje input, köra update_list() med vår filtrerade lista
 document.querySelector("#search").addEventListener("input", (e) => {
     const searchText = e.target.value.toLowerCase().trim()
 
     const filteredActivities = activities.filter(activity => {
-        return activity.name.toLowerCase().includes(searchText) ||
-               activity.loc.toLowerCase().includes(searchText) ||
-               activity.desc.toLowerCase().includes(searchText)
+        return activity.title.toLowerCase().includes(searchText) ||
+               activity.location.toLowerCase().includes(searchText) ||
+               activity.description.toLowerCase().includes(searchText)
     })
 
     update_list(filteredActivities)
 })
-
-
-function loadmap() {
-    
-      
-      const startLng = 17.619748;
-      const startLat = 59.859456;
-      const startZ = 1;
-
-        var map = new Mazemap.Map({
-            container: 'map',
-            campuses: 110,
-            center: {lng: startLng, lat: startLat},
-            zoom: 12,
-            zLevel: startZ
-        });
-
-        var routeDrawer;
-        var currentPopup;
-
-        map.on('load', function() {
-          routeDrawer = new Mazemap.AtoBTripBasicDrawer(map, {
-            routeLineColorPrimary: '#0099EA', 
-            showDirectionArrows: true
-          });
-
-          onMapLoad()
-
-        });
-
-        function onMapLoad() {
-          var targetLngLat = {
-            lat: 59.8978,
-            lng: 17.6333
-          };
-          var targetZ = map.zLevel;
-
-          if(currentPopup) {
-            currentPopup.remove();
-          }
-
-          if(routeDrawer) {
-            routeDrawer.clear();
-          }
-
-            var fromString = `${startLng},${startLat},${startZ}`;
-            var toString = `${targetLngLat.lng},${targetLngLat.lat},${targetZ}`;
-
-            const routeParams = {
-              mode: "PEDESTRIAN",
-              campusCollectionTag: "uu",
-              fromLngLatZ: fromString,
-              toLngLatZ: toString,
-              lang: "sv"
-            };
-
-            Mazemap.Data.getAtoBTrip(routeParams)
-            .then(function(trip) {
-              routeDrawer.setAtoBTrip(trip);
-
-            Mazemap.Data.getPoiAt(targetLngLat, targetZ)
-            .then(poi => {
-            var poiName = (poi && poi.properties && poi.properties.name) ? poi.properties.name : "Framme!";
-
-              currentPopup = new Mazemap.Popup()
-              .setLngLat(targetLngLat)
-              .setHTML(`${poiName}`)
-              .addTo(map);
-            });
-        });
-        }
-}
