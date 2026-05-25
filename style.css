@@ -104,13 +104,18 @@ input[type="search"] {
     font-weight: 600;
     color: black;
     text-decoration: none;
+    padding: 1rem;
+    padding: 1rem;
 }
 
 .banner h1 {
     /* justera margin-top för att bestämma height på banner (skevt) */
-    margin-top: 15vh;
-    margin-bottom: 0;
-    color: white;
+    position: relative;
+    margin-top: calc(300px - 4rem);
+    color: black;
+    height: 2rem;
+    padding: 1rem;
+
 }
 
 button {

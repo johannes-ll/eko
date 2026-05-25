@@ -59,7 +59,8 @@ Om adressen inte hittas, visas ett felmeddelande.*/
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-        <header>
+    <div class="c">
+ <header>
         <h1>Fly från Eko</h1>
         <nav>
             <a href="mainPage.php">Till startsidan</a>
@@ -85,6 +86,7 @@ Om adressen inte hittas, visas ett felmeddelande.*/
 
         <input type="submit" value="Create Post">
     </form>
+    </div>
     </div>
 </body>
 </html>

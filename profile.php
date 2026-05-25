@@ -16,7 +16,8 @@ Användaren kan ändra sitt användarnamn och lösenord via formulären på sida
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <header>
+    <div class="c">
+ <header>
         <h1>Fly från Eko</h1>
         <nav>
             <a href="logout.php"> <br> Logga ut </a>
@@ -35,5 +36,6 @@ Användaren kan ändra sitt användarnamn och lösenord via formulären på sida
             <button type="submit">Skicka</button>
         </form>
      </div>
+    </div>
 </body>
 </html>
