@@ -40,13 +40,8 @@ require 'config.php';
             </div>
         </div>
     </div>
-<<<<<<< Updated upstream
-    <script src="app.js?v=2"></script>
-    <script src="map.js"></script>
-=======
     <div class="hidden"></div>
     <script src="app.js"></script>
     <script src="map.js" defer></script>
->>>>>>> Stashed changes
 </body>
 </html>

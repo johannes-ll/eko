@@ -79,6 +79,7 @@ function createActivityCard(activity) {
 }
 
 async function update_list(a) {
+    document.querySelector(".hidden").appendChild(mzmap)
     document.querySelector("header").style.display = "flex"
 
     const list = document.querySelector(".list")
@@ -192,11 +193,16 @@ async function show_activity(id) {
 
                 buttondiv.appendChild(wrapper.firstElementChild)
             }
-        })
+    })
 
     document.querySelector(".mapboxgl-canvas").style.width = "80vw"
     banner.appendChild(mzmap)
     activityDiv.appendChild(banner)
+
+    window.setRoute({
+        lat: activity.latitude,
+        lng: activity.longitude
+    })
 
     content.appendChild(members)
     content.appendChild(location)
@@ -209,7 +215,7 @@ async function show_activity(id) {
     list.replaceChildren(activityDiv)
 
 
-    
+    window.dispatchEvent(new Event("resize"));
 }
 // eventlistnerer för vår sök
 // vi vill söka efter varje input, köra update_list() med vår filtrerade lista
