@@ -61,7 +61,6 @@ function createActivityCard(activity) {
     title.textContent = activity.title
 
     const link = document.createElement("a")
-    link.href = ""
 
     const addressSpan = document.createElement("span")
     addressSpan.textContent = activity.adress + " "
@@ -204,7 +203,7 @@ async function show_activity(id) {
         lng: activity.longitude
     })
 
-    content.appendChild(members)
+    content.appendChild(members)    
     content.appendChild(location)
     content.appendChild(creator)
     content.appendChild(description)

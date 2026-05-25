@@ -21,7 +21,7 @@ require 'config.php';
             
             <div>
                 <a href="profile.php">Din profil</a>
-                <a href="createPost.php">Skapa</a>
+                <a href="createPost.php">Skapa nytt event</a>
                 <input type="search" name="" id="search" placeholder="Sök efter aktivteter...">
             </div>
         </header>

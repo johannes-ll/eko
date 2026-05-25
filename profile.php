@@ -20,7 +20,7 @@ Användaren kan ändra sitt användarnamn och lösenord via formulären på sida
  <header>
         <h1>Fly från Eko</h1>
         <nav>
-            <a href="logout.php"> <br> Logga ut </a>
+            <a href="logout.php">Logga ut</a>
             <a href="mainPage.php">Till startsidan</a>
         </nav>
     </header>
