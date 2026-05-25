@@ -60,7 +60,7 @@ function createActivityCard(activity) {
     const title = document.createElement("h2")
     title.textContent = activity.title
 
-    const link = document.createElement("a");
+    const link = document.createElement("a")
     link.href = ""
 
     const addressSpan = document.createElement("span")
@@ -169,7 +169,7 @@ async function show_activity(id) {
     const button = document.createElement("button")
     button.textContent = "Gå med i aktivitet!"
     button.onclick = () => {
-      window.location.href = `saveParticipants.php?id=${activity.id}`;
+      window.location.href = `saveParticipants.php?id=${activity.id}`
     }
 
     const backButton = document.createElement("button")
@@ -215,7 +215,7 @@ async function show_activity(id) {
     list.replaceChildren(activityDiv)
 
 
-    window.dispatchEvent(new Event("resize"));
+    window.dispatchEvent(new Event("resize"))
 }
 // eventlistnerer för vår sök
 // vi vill söka efter varje input, köra update_list() med vår filtrerade lista

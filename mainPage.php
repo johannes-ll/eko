@@ -16,11 +16,11 @@ require 'config.php';
 </head>
 <body>
     <div class="c">
-        <a href="profile.php">Din profil</a>
         <header>
             <h1>Fly Från Eko</h1>
             
             <div>
+                <a href="profile.php">Din profil</a>
                 <a href="createPost.php">Skapa</a>
                 <input type="search" name="" id="search" placeholder="Sök efter aktivteter...">
             </div>
