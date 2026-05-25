@@ -159,8 +159,17 @@ async function show_activity(id) {
     const location = document.createElement("p")
     location.textContent = `Plats: ${activity.adress}`
 
-    const creator = document.createElement("p")
-    creator.textContent = `Skapare ID: ${activity.userid}`
+
+    const months = [
+    "Januari", "Februari", "Mars", "April",
+    "Maj", "Juni", "Juli", "Augusti",
+    "September", "Oktober", "November", "December"
+]
+
+    const readableDate = `${Number(day)} ${months[Number(month) - 1]}`
+
+    const datediv = document.createElement("p")
+    datediv.textContent = `Tid: ${readableDate} ${activity.time}`
 
     const description = document.createElement("p")
     description.textContent = activity.info
@@ -205,7 +214,7 @@ async function show_activity(id) {
 
     content.appendChild(members)    
     content.appendChild(location)
-    content.appendChild(creator)
+    content.appendChild(datediv)
     content.appendChild(description)
     content.appendChild(buttondiv)
 
