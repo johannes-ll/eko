@@ -175,8 +175,8 @@ async function show_activity(id) {
     const month = rawDate.slice(2, 4)
     const year = "20" + rawDate.slice(4, 6)
 
+    // isoString = "2026-05-30T10:00:00.000Z"
     const isoString = new Date(`${year}-${month}-${day}T${time}:00`).toISOString()
-
 
     // vi anropar getWeather med plats och tid och får tillbaka väder för den platsen och tiden.
     fetch(`getWeather.php?lat=${activity.latitude}&lon=${activity.longitude}&time=${isoString}`)

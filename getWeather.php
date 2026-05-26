@@ -2,8 +2,8 @@
 /*Anropar smhi API, hämtar data för lufttemperatur samt symbol för särskilda koordinater*/
 header('Content-Type: application/json');
 
-$lat = isset($_GET['lat']) ? (float)$_GET['lat'] : null;
-$lon = isset($_GET['lon']) ? (float)$_GET['lon'] : null;
+$lat = isset($_GET['lat']) ? round((float)$_GET['lat'], 6) : null;
+$lon = isset($_GET['lon']) ? round((float)$_GET['lon'], 6) : null;
 $time = isset($_GET['time']) ? trim($_GET['time']) : null;
 
 if ($lat === null || $lon === null) {
@@ -16,7 +16,7 @@ $url = "https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/
 $response = @file_get_contents($url);
 /*Kontroll*/
 if ($response === false) {
-    echo json_encode(["error" => "SMHI request failed"]);
+    echo json_encode(["error" => "SMHI request failed, {$lon}, {$lat}"]);
     exit;
 }
 /*Avkodar json rådata till php-array*/
