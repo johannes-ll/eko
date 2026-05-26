@@ -8,7 +8,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         // Kollar om e-post eller användarnamn redan finns i databasen, case-insensitivet. Om det finns, sätts ett felmeddelande. Om inte så skapas användaren och sessionen startas.
         $emailCheck = $pdo->prepare("SELECT COUNT(*) FROM User WHERE email = :email COLLATE NOCASE");
         $emailCheck->execute([':email' => $email]);

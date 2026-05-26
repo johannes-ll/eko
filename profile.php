@@ -28,12 +28,12 @@ Användaren kan ändra sitt användarnamn och lösenord via formulären på sida
         <div class="container">
             <form class="content" action="changeUN.php" method="POST">
                 <label for="Username">Nytt användarnamn:</label>
-                <textarea name="Username" placeholder="Skriv ditt nya användarnamn..." required minlength="4" required></textarea>
+                <input name="Username" placeholder="Skriv ditt nya användarnamn..." required minlength="4" required></input>
                 <button type="submit">Skicka</button>
             </form>
             <form class="content" action="changePW.php" method="POST">
                 <label for="Password">Nytt lösenord:</label>
-                <textarea name="Password" placeholder="Skriv ditt nya lösenord..." pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter" required></textarea>
+                <input type="password" name="Password" placeholder="Skriv ditt nya lösenord..." pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter" required></input>
                 <button type="submit">Skicka</button>
             </form>
         </div>
