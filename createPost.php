@@ -76,7 +76,7 @@ Om adressen inte hittas, visas ett felmeddelande.*/
         <textarea name="info" id="info" placeholder="Beskriv ditt event" required></textarea>
         
         <label for="date">Date:</label>
-        <input type="text" name="date" id="date" placeholder="yymmdd" required>
+        <input type="text" name="date" id="date" placeholder="ddmmyy" required>
         
         <label for="time">Time:</label>
         <input type="string" name="time" id="time" placeholder="00:00"required>
