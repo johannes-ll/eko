@@ -2,6 +2,7 @@
 /*Anropar smhi API, hämtar data för lufttemperatur samt symbol för särskilda koordinater*/
 header('Content-Type: application/json');
 
+// SMHI tar inte emot längre koordinater tydligen, vi måste korta ner.
 $lat = isset($_GET['lat']) ? round((float)$_GET['lat'], 6) : null;
 $lon = isset($_GET['lon']) ? round((float)$_GET['lon'], 6) : null;
 $time = isset($_GET['time']) ? trim($_GET['time']) : null;
