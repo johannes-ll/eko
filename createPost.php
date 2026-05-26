@@ -10,7 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $info = $_POST["info"];
     $date = $_POST["date"];
     $time = $_POST["time"];
+    // Vi lägger automatiskt till ", Uppsala" i smyg om användaren glömde skriva det
     $adress = $_POST["adress"];
+    if (stripos($adress, 'Uppsala') === false) {
+        $adress .= ", Uppsala";
+    }
 /*För att få latitud och longitud från adressen, används Nominatim API från OpenStreetMap. Adressen kodas först för att säkerställa att den är korrekt formaterad för URL:en. 
 Sedan görs en HTTP-förfrågan till API:et, och svaret dekodas från JSON-format. Om adressen hittas skapas latitud och longitud som sedan används  i SQL-frågan för att skapa det nya eventet i databasen.
 Om adressen inte hittas, visas ett felmeddelande.*/
@@ -46,7 +50,7 @@ Om adressen inte hittas, visas ett felmeddelande.*/
         exit;
     }
     else {
-    echo "Kunde inte hitta adressen, försök vara mer specifik (t.ex. lägg till ', Uppsala').";}
+    echo "Kunde inte hitta adressen, försök igen.";}
 }
 ?>
 <!DOCTYPE html>
@@ -82,7 +86,7 @@ Om adressen inte hittas, visas ett felmeddelande.*/
         <input type="text" name="time" id="time" placeholder="00:00" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" required>
         
         <label for="adres">Adress:</label>
-        <input type="text" name="adress" id="adress" placeholder="Ex Studentvägen 1, Uppsala"required>
+        <input type="text" name="adress" id="adress" placeholder="Ex Studentvägen 1"required>
 
         <input type="submit" value="Create Post">
     </form>
