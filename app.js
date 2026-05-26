@@ -213,8 +213,8 @@ async function show_activity(id) {
     buttondiv.appendChild(button)
     buttondiv.appendChild(backButton)
 
-    // vi vill bara visa delete knappen om användaren kan ta bort aktiviteten.
-    fetch(`get_delete_button.php?authorId=${activity.userid}`)
+     // vi vill bara visa delete knappen om användaren kan ta bort aktiviteten.
+    fetch(`get_delete_button.php?authorId=${activity.userid}&eventID=${activity.id}`)
         .then(response => response.text())
         .then(html => {
 

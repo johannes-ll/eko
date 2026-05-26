@@ -18,7 +18,7 @@ Användaren kan ändra sitt användarnamn och lösenord via formulären på sida
 <body>
     <div class="c">
  <header>
-        <h1>Fly från Eko</h1>
+        <h1>Fly från Eko</h1> <h2> <?php echo $_SESSION['username']; ?>s profil</h2>
         <nav>
             <a href="logout.php">Logga ut</a>
             <a href="mainPage.php">Till startsidan</a>
