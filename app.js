@@ -5,23 +5,26 @@
 // Vi lagrar temperatur med tidsstämpel, om det gått en timme från senaste uppdatering så uppdaterar vi info med nytt väder innan vi ger tillbaka till användare
 
 
+// vi skapar en konstant map som vi flyttar runt mellan en gömd container och vå banner, på de sättet slipper vi initialisera en ny map varje gång
+// egentligen smartare att behålla allt på samma plats och gömma containern och sen bara updatera rutt samt resten av info, men då riskerar vi att få tomma fält om inf saknas någonstans.
 const mzmap = document.createElement("div")
 mzmap.id = "map"
 mzmap.class = "mazemap"
 document.querySelector(".hidden").appendChild(mzmap)
 
+// vi introducerar vår globala aktivitetslista
 var activities
 
 async function getEvents() {
     const response = await fetch("getEvents.php")
     const data = await response.json()
 
+    // vi sätter vår globala aktivitetslista varje gång vi frågar om events samt returnerar dem.
     activities = data
     return data
 }
 
-getEvents()
-
+// vi frågar om en ws2 kod från smhi som representerar väder, här matchar vi koden med väderförhållande som representeras med en emoji.
 function getWeatherEmoji(code) {
     switch (code) {
         case 1: return "☀️"
@@ -50,10 +53,13 @@ function getWeatherEmoji(code) {
     }
 }
 
+// vår funktion som skapar varje barn i vår lista av activities. vi kör den här så många gånger som de finns activities i vår activities var.
 function createActivityCard(activity) {
     const activityDiv = document.createElement("div")
     activityDiv.className = "card"
 
+    // om vi klickar p activitien så körs show_activity.
+    // vi tar med id som input så show activity vet vilken activity som sk visas.
     activityDiv.addEventListener("click", (e) => {
         show_activity(activity.id)
     })
@@ -77,27 +83,34 @@ function createActivityCard(activity) {
     infoDiv.appendChild(link)
     activityDiv.appendChild(infoDiv)
 
+    // vi ger tillbaa hela vår div som vi skapat, vi sätter alltså inte ut något i den här funktionen.
     return activityDiv
 }
 
+// funktionen tar antingen en filtrerad lista som vi får frn vår sökbar eller inget alls. om inget fås med så laddar vi in alla activities.
 async function update_list(a) {
+    // vi flyttar på vår map till vår gömda div.
     document.querySelector(".hidden").appendChild(mzmap)
+    // vi börjar visa vår header igen. den göms av show_activity()
     document.querySelector("header").style.display = "flex"
 
     const list = document.querySelector(".list")
     list.replaceChildren()
 
+    // om vi inte kört funktionen med vår egna lista så tar vi den globala listan med activities.
     if (!a) {
         a = activities
         console.log("was undefined")
     }
 
+    // loopar igenom listan och gör cards för varje barn.
     a.forEach(activity => {
         const card = createActivityCard(activity)
         list.appendChild(card)
     })
 }
 
+// när vi först laddar in sidan måste vi vänta på att getEvents har kört färdigt.
 async function init() {
     await getEvents()
     update_list()
@@ -105,14 +118,17 @@ async function init() {
 
 init()
 
+// funktion som visar en individuell aktivitet. tar aktivitetens id med som input.
 async function show_activity(id) {
+    // vi tar bort headern.
     document.querySelector("header").style.display = "none"
 
-
+    // letar reda på vilken activity vi syftar på med vårat id.
     const activity = activities.find(item => item.id == id)
 
     const list = document.querySelector(".list")
 
+    // om den aktiviteten inte finns så ger vi error (sanity check, har adrig hänt.)
     if (!activity) {
         const errorText = document.createElement("p")
         errorText.textContent = "Aktiviteten kunde inte hittas."
@@ -130,6 +146,7 @@ async function show_activity(id) {
     temp.className = "temp"
     temp.href = ""
 
+    // vi måste konvertera date från de skumma sättet som de sparas i db.
     const rawDate = activity.date;   // "260520"
     const time = activity.time;      // "13:00"
 
@@ -140,9 +157,11 @@ async function show_activity(id) {
     const isoString = new Date(`${year}-${month}-${day}T${time}:00`).toISOString()
 
 
+    // vi anropar getWeather med plats och tid och får tillbaka väder för den platsen och tiden.
     fetch(`getWeather.php?lat=${activity.latitude}&lon=${activity.longitude}&time=${isoString}`)
         .then(r => r.json())
         .then(data => {
+            // vi skriver ut temeraturen och condition med hjälp av vår getWeatherEmoji() funktion.
             temp.textContent =
                 `${getWeatherEmoji(data.code)} ${data.temp}`
         })
@@ -164,10 +183,10 @@ async function show_activity(id) {
 
 
     const months = [
-    "Januari", "Februari", "Mars", "April",
-    "Maj", "Juni", "Juli", "Augusti",
-    "September", "Oktober", "November", "December"
-]
+        "Januari", "Februari", "Mars", "April",
+        "Maj", "Juni", "Juli", "Augusti",
+        "September", "Oktober", "November", "December"
+    ]
 
     const readableDate = `${Number(day)} ${months[Number(month) - 1]}`
 
@@ -177,6 +196,7 @@ async function show_activity(id) {
     const description = document.createElement("p")
     description.textContent = activity.info
 
+    // gå med knapp.
     const button = document.createElement("button")
     button.textContent = "Gå med i aktivitet!"
     button.onclick = () => {
@@ -193,6 +213,7 @@ async function show_activity(id) {
     buttondiv.appendChild(button)
     buttondiv.appendChild(backButton)
 
+    // vi vill bara visa delete knappen om användaren kan ta bort aktiviteten.
     fetch(`get_delete_button.php?authorId=${activity.userid}`)
         .then(response => response.text())
         .then(html => {
@@ -206,10 +227,13 @@ async function show_activity(id) {
             }
     })
 
+    // styling för mazemap
     document.querySelector(".mapboxgl-canvas").style.width = "80vw"
+    // vi flyttar map från den gömda diven till vår banner
     banner.appendChild(mzmap)
     activityDiv.appendChild(banner)
 
+    // vi callar en gglobal setRoute funktion som finns i map.js
     window.setRoute({
         lat: activity.latitude,
         lng: activity.longitude
@@ -225,7 +249,7 @@ async function show_activity(id) {
 
     list.replaceChildren(activityDiv)
 
-
+    // behövs för att mazemap ska fatta att vi updaterat width på .mapboxgl-canvas
     window.dispatchEvent(new Event("resize"))
 }
 // eventlistnerer för vår sök
