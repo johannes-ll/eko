@@ -4,12 +4,12 @@
     require 'config.php';
 
     $error = "";
-      
+      // Kollar om formuläret har skickats
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
+        // Kollar om e-post eller användarnamn redan finns i databasen, case-insensitivet. Om det finns, sätts ett felmeddelande. Om inte så skapas användaren och sessionen startas.
         $emailCheck = $pdo->prepare("SELECT COUNT(*) FROM User WHERE email = :email COLLATE NOCASE");
         $emailCheck->execute([':email' => $email]);
         $emailExists = $emailCheck->fetchColumn();
@@ -17,12 +17,13 @@
         $userCheck = $pdo->prepare("SELECT COUNT(*) FROM User WHERE username = :username COLLATE NOCASE");
         $userCheck->execute([':username' => $username]);
         $userExists = $userCheck->fetchColumn();
-
+        // Om e-post eller användarnamn redan finns sätts ett felmeddelande. Om inte så skapas användaren och sessionen startas.
         if ($emailExists > 0) {
             $error = "Email already in use";
         } else if ($userExists > 0) {
             $error = "Username already in use";
         } else {
+            // Skapar användaren i databasen säkert med en prepared statement
             $stmt = $pdo->prepare("INSERT INTO User (username, email, password) VALUES (:Username, :Email, :Password)");
             $stmt->bindParam(':Username', $username);
             $stmt->bindParam(':Email', $email);
