@@ -27,7 +27,7 @@ Om adressen inte hittas, visas ett felmeddelande.*/
 
     $response = file_get_contents($url, false, $context);
     $data = json_decode($response, true);
-
+    // Kollar om adressen hittades och hämtar latitud och longitud
     if (!empty($data)) {
         $latitude = $data[0]['lat'];
         $longitude = $data[0]['lon'];

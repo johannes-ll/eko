@@ -15,5 +15,5 @@ if (
     )
 ) {
     // Visa delete-knappen, har en onclick-event som först visar en bekräftelse-dialog. Om användaren bekräftar, omdirigeras de till deleteEvent.php med eventets ID som parameter.
-    echo '<button class="delete-btn" onclick="if(confirm(\'Är du säker på att du vill ta bort detta event?\')) { window.location.href=\'deleteEvent.php?id=' . $eventID . '\'; }">Delete</button>';
+    echo '<button onclick="if(confirm(\'Är du säker på att du vill ta bort detta event?\')) { window.location.href=\'deleteEvent.php?id=' . $eventID . '\'; }">Delete</button>';
 }

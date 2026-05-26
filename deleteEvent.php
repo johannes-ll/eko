@@ -11,7 +11,7 @@ if (!isset($_GET['id'])) {
 }
 
 $eventID = $_GET['id'];
-
+// Försöker ta bort aktiviteten från databasen säkert med en prepared statement.
 try {
     $stmt = $pdo->prepare("DELETE FROM Event WHERE eventID = :eventID");
     $stmt->execute([':eventID' => $eventID]);

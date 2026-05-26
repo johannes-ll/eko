@@ -4,17 +4,17 @@
     require 'config.php';
 
     $error = "";
-      
+    // Kollar om formuläret har skickats
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
         $username = $_POST['username'];
         $password = $_POST['password'];
-          
+        // Hämtar användaren från databasen 
         $stmt = $pdo->prepare("SELECT * FROM User WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-          
+        // Verifierar lösenordet och startar sessionen om det är korrekt
         if ($user && password_verify($password, $user['password'])) {
           $_SESSION['user_id'] = $user['userID'];
           $_SESSION['username'] = $user['username'];
@@ -40,6 +40,7 @@
         <header>
             <h1>Fly från Eko</h1>
         </header>
+        <!-- Inloggningsformulär, skriver ut eventuella felmeddelanden -->
         <div id="container" class="content">
             <form action="index.php" method="post">
             <?php if ($error != ""): ?>

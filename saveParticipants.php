@@ -15,9 +15,4 @@ try {
     header("Location: mainPage.php");
     exit;
 }
-
-/*RÄKNAR UT HUR MÅNGA SOM KOMMER
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM EventParticipant WHERE eventID = :eventID");
-$stmt->execute([':eventID' => $eventID]);
-$totalAttending = $stmt->fetchColumn();*/
 ?>
