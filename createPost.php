@@ -49,7 +49,7 @@ Om adressen inte hittas, visas ett felmeddelande.*/
     echo "Kunde inte hitta adressen, försök vara mer specifik (t.ex. lägg till ', Uppsala').";}
 }
 ?>
-<doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>  
     <meta charset="UTF-8">
@@ -76,10 +76,10 @@ Om adressen inte hittas, visas ett felmeddelande.*/
         <textarea name="info" id="info" placeholder="Beskriv ditt event" required></textarea>
         
         <label for="date">Date:</label>
-        <input type="text" name="date" id="date" placeholder="ddmmyy" required>
+        <input type="text" name="date" id="date" placeholder="ddmmyy"  pattern="^\d{6}$" required>
         
         <label for="time">Time:</label>
-        <input type="string" name="time" id="time" placeholder="00:00"required>
+        <input type="text" name="time" id="time" placeholder="00:00" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" required>
         
         <label for="adres">Adress:</label>
         <input type="text" name="adress" id="adress" placeholder="Ex Studentvägen 1, Uppsala"required>
