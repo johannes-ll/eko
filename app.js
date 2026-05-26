@@ -168,7 +168,7 @@ async function show_activity(id) {
     temp.href = ""
 
     // vi måste konvertera date från de skumma sättet som de sparas i db.
-    const rawDate = activity.date;   // "260520"
+    const rawDate = activity.date;   // "ddmmyy"
     const time = activity.time;      // "13:00"
 
     const day = rawDate.slice(0, 2)

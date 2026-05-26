@@ -46,7 +46,7 @@ require 'config.php';
     </div>
     <!-- vår hidden klass där kartan läggs in när den inte ska visas -->
     <div class="hidden"></div>
-    <script src="app.js"></script>
+    <script src="app.js?v=1.0"></script>
     <script src="map.js" defer></script>
 </body>
 </html>
