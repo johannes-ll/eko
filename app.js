@@ -215,7 +215,7 @@ async function show_activity(id) {
     datediv.textContent = `Tid: ${readableDate} ${activity.time}`
 
     const creatordiv = document.createElement("p")
-    creatordiv.textContent = activity.username
+    creatordiv.textContent = `Skapare av event: ${activity.username}`
 
     const description = document.createElement("p")
     description.textContent = activity.info
