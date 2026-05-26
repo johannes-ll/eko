@@ -80,7 +80,7 @@ Om adressen inte hittas, visas ett felmeddelande.*/
         <textarea name="info" id="info" placeholder="Beskriv ditt event" required></textarea>
         
         <label for="date">Date:</label>
-        <input type="text" name="date" id="date" placeholder="ddmmyy"  pattern="^\d{6}$" required>
+        <input type="text" name="date" id="date" placeholder="ddmmyy" pattern="^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[0-2])\d{2}$" required title="Skriv i formatet ddmmyy (t.ex. 260526)" >
         
         <label for="time">Time:</label>
         <input type="text" name="time" id="time" placeholder="00:00" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" required>
