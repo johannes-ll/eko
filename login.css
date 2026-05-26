@@ -2,7 +2,9 @@
 .content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
+    padding: 2rem 14vw;
+    gap: 1rem;
 }
 
 .content form {
@@ -14,4 +16,9 @@
 
 .content form input {
     padding: .4rem;
+}
+
+#container {
+    display: flex;
+    align-items: center;
 }
