@@ -58,10 +58,15 @@ window.setRoute = function(targetLngLat) {
 
             routeDrawer.setAtoBTrip(trip);
 
-            map.flyTo({
-                center: targetLngLat,
-                zoom: 17,
-                speed: 1.4
+            const bounds = new Mazemap.LngLatBounds();
+
+            bounds.extend([startLng, startLat]);
+            bounds.extend([targetLngLat.lng, targetLngLat.lat]);
+
+            map.fitBounds(bounds, {
+                padding: {top: 50, bottom: 50, left: 50, right: 50},
+                maxZoom: 17,
+                linear: false
             });
 
             return Mazemap.Data.getPoiAt(targetLngLat, targetZ)
