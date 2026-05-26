@@ -53,6 +53,27 @@ function getWeatherEmoji(code) {
     }
 }
 
+// --------------------------- varför createElement istället för innerHTML ----------------------------- //
+//
+// Vi bygger våra cards med createElement istället för att skriva all HTML med innerHTML.
+//
+// Varför?
+//
+// 1. Säkrare
+// Om data kommer från användare eller databasen kan innerHTML råka tolka innehållet som HTML.
+// createElement + textContent gör istället att text behandlas som vanlig text,
+// vilket minskar risken för XSS/problem med injicerad HTML.
+//
+// 2. Enklare att koppla events
+// När vi skapar riktiga DOM-element direkt kan vi enkelt lägga på eventListeners,
+// t.ex:
+//
+// activityDiv.addEventListener("click", ...)
+//
+// Med innerHTML måste man ofta leta upp elementen igen efteråt.
+//
+// För att kolla på hur html är strukturerad rekommederar jag att kolla i inspektorn i webläsaren
+
 // vår funktion som skapar varje barn i vår lista av activities. vi kör den här så många gånger som de finns activities i vår activities var.
 function createActivityCard(activity) {
     const activityDiv = document.createElement("div")

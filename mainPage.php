@@ -8,14 +8,17 @@ require 'config.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fly från Eko</title>
     <link rel="stylesheet" href="style.css">
 
+    <!-- vi skriver vår egna css för mazemap så de här skippar vi -->
     <!-- <link rel="stylesheet" href="https://api.mazemap.com/js/v2.2.6/mazemap.min.css"> -->
     <script type='text/javascript' src='https://api.mazemap.com/js/v2.2.6/mazemap.min.js' defer></script>
 </head>
 <body>
+    <!-- vår  main container -->
     <div class="c">
+        <!-- headern är det enda som vi skapar statiskt med html -->
         <header>
             <h1>Fly Från Eko </h1> <h2> Välkommen <?php echo $_SESSION['username']; ?></h2>
             
@@ -26,10 +29,11 @@ require 'config.php';
             </div>
         </header>
         <div class="list">
+            <!-- det här är en placeholder -->
             <div class="card">
                 <div>
-                    <h2>Activity name</h2>
-                    <a href=""><span>adress</span>20 going</a>
+                    <h2>Aktiviteter ska dyka upp här!</h2>
+                    <a href=""><span>Adress till aktivitet</span>medlemmar som kommer!</a>
                 </div>
                 <div class="weather">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16">
@@ -40,6 +44,7 @@ require 'config.php';
             </div>
         </div>
     </div>
+    <!-- vår hidden klass där kartan läggs in när den inte ska visas -->
     <div class="hidden"></div>
     <script src="app.js"></script>
     <script src="map.js" defer></script>

@@ -1,7 +1,9 @@
+// konstanter som aldrig behöver ändras, vi utgår alltid från eko.
 const startLng = 17.619748
 const startLat = 59.859456
 const startZ = 1
 
+// vi skapar vår mazemap karta
 var map = new Mazemap.Map({
     container: 'map',
     campuses: 110,
@@ -13,34 +15,28 @@ var map = new Mazemap.Map({
 var routeDrawer
 var currentPopup
 
+// när kartan laddar --> skapa drawer
+// vi gör inget mer eftersom vi preloadar mazemap kartan
 map.on('load', function () {
 
     routeDrawer = new Mazemap.AtoBTripBasicDrawer(map, {
         routeLineColorPrimary: '#0099EA',
         showDirectionArrows: true
     })
-
-    // optional initial route
-    setRoute({
-        lat: 59.8978,
-        lng: 17.6333
-    })
 })
 
 
-// MAKE THIS GLOBAL
+// vår globala setRoute funktion som vi anropar från app.js
 window.setRoute = function(targetLngLat) {
 
     const targetZ = map.zLevel
 
-    if (currentPopup) {
-        currentPopup.remove()
-    }
 
     if (routeDrawer) {
         routeDrawer.clear()
     }
 
+    // konvertera våra koordinater så mazemap förstår
     const fromString = `${startLng},${startLat},${startZ}`
     const toString = `${targetLngLat.lng},${targetLngLat.lat},${targetZ}`
 
@@ -56,8 +52,10 @@ window.setRoute = function(targetLngLat) {
     Mazemap.Data.getAtoBTrip(routeParams)
         .then(function(trip) {
 
+            // rita ut trip
             routeDrawer.setAtoBTrip(trip);
 
+            // kolla upp bounds för kartan
             const bounds = new Mazemap.LngLatBounds();
 
             bounds.extend([startLng, startLat]);
@@ -71,16 +69,5 @@ window.setRoute = function(targetLngLat) {
 
             return Mazemap.Data.getPoiAt(targetLngLat, targetZ)
         })
-        .then(poi => {
-
-            // const poiName =
-            //     (poi && poi.properties && poi.properties.name)
-            //         ? poi.properties.name
-            //         : "Framme!"
-
-            // currentPopup = new Mazemap.Popup()
-            //     .setLngLat(targetLngLat)
-            //     .setHTML(poiName)
-            //     .addTo(map)
-        })
+        .then(poi => {})
 }

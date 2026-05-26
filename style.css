@@ -1,8 +1,8 @@
 body {
     font-family: sans-serif;
-    /* background: rgb(223, 223, 235); */
     background-color: #e5e5f7;
     opacity: 1;
+    /* cred: https://www.magicpattern.design/tools/css-backgrounds */
     background-image:  linear-gradient(#d4d5f9 1px, transparent 1px), linear-gradient(to right, #d4d5f9 1px, #e5e5f7 1px);
     background-size: 20px 20px;
 }
@@ -10,7 +10,6 @@ body {
 .c {
     width: 80vw;
     margin: 10vh auto;
-    /* border: 2px #afafd2 solid; */
 }
 
 header {
@@ -43,6 +42,7 @@ input[type="search"] {
     justify-content: space-between;
 }
 
+/* vi rundar sista barnet */
 .card:last-child {
     border-radius: 0 0 1rem 1rem;
 }
@@ -68,15 +68,13 @@ input[type="search"] {
     gap: 1rem;
     font-size: 1.8rem;
     padding: .4rem 1rem;
-    /* annan look: */
-    /* border-radius: 10rem; */
-    /* background: linear-gradient(#d1c2ff, #b1a2de); */
 }
 
 .weather .temp {
     margin: 0;
 }
 
+/* skapar psuedo element eftersom det här adrig kommer ändras, onödigt tt göra i js. */
 .temp::after {
     content: "°C";
 }
@@ -87,16 +85,15 @@ input[type="search"] {
 }
 
 .banner {
-    /* bakgrund kan vara beroende på kategori eller bestämd av användare */
-    /* kan också vara karta på området? */
+    /* de här visas bara upp om kartan inte laddar av någon anledning */
     background-image: url("https://www.teamsportia.se/wp-content/uploads/2017/05/fotboll1.png");
     background-size: contain;
     display: flex;  
     flex-direction: row-reverse;
     justify-content: space-between;
     padding: 0rem;
+    /* vi hardcodar vår banner height eftersom mazemap har en bestämd height som är jobbig att ändra på */
     height: 300px;
-    /* var 2rem  */
 }
 
 .banner a {
@@ -109,8 +106,8 @@ input[type="search"] {
 }
 
 .banner h1 {
-    /* justera margin-top för att bestämma height på banner (skevt) */
     position: relative;
+    /* inte korrekt sätt men funkar korrekt. */
     margin-top: calc(300px - 4rem);
     color: black;
     height: 2rem;
@@ -127,6 +124,7 @@ button {
 
 .list .card {
     cursor: pointer;
+    /* animerar allt */
     transition: 200ms;
 }
 
@@ -146,6 +144,7 @@ button {
 }
 
 .btns * {
+    /* animerar allt */
     transition: 200ms;
 }
 
@@ -154,6 +153,7 @@ button {
 }
 
 .banner * {
+    /* vi vill att allt inne i banner ska displayas över kartan */
     z-index: 2;
 }
 
@@ -161,17 +161,20 @@ button {
     position: absolute;
     width: 80vw;
     height: 300px;
+    /* kartan ska displayas under resten (h2 och a) */
     z-index: 1;
 }
 
-canvas.mapboxgl-canvas {
+/* de här sätts i js istället. */
+/* canvas.mapboxgl-canvas {
     width: 80vw;
-}
+} */
 
 .hidden {
     display: none;
 }
 
+/* v tar bort fula rejer från mazemap */
 .mapboxgl-control-container,
 .mapboxgl-popup-anchor-top,
 .zlevel-marker {
