@@ -1,8 +1,12 @@
 <?php
-/*Hämtar alla event från databasen och räknar ut hur många som kommer att delta i varje event. Resultatet returneras som en JSON-array.*/
 require 'config.php';
 
-$query = "SELECT * FROM Event";
+$query = "
+    SELECT Event.*, User.username
+    FROM Event
+    JOIN User ON Event.userID = User.userID
+";
+
 $content = $pdo->prepare($query);
 $content->execute();
 
@@ -31,6 +35,7 @@ while ($row = $content->fetch(PDO::FETCH_ASSOC)) {
         "latitude" => (float)$row['latitude'],
         "id" => (int)$row['eventID'],
         "userid" => (int)$row['userID'],
+        "username" => $row['username'],
         "adress" => $row['adress'],
         "members" => (int)$totalAttending
     ];

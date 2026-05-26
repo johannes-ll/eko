@@ -214,6 +214,9 @@ async function show_activity(id) {
     const datediv = document.createElement("p")
     datediv.textContent = `Tid: ${readableDate} ${activity.time}`
 
+    const creatordiv = document.createElement("p")
+    creatordiv.textContent = `Skapare av event: ${activity.username}`
+
     const description = document.createElement("p")
     description.textContent = activity.info
 
@@ -263,6 +266,7 @@ async function show_activity(id) {
     content.appendChild(members)    
     content.appendChild(location)
     content.appendChild(datediv)
+    content.appendChild(creatordiv)
     content.appendChild(description)
     content.appendChild(buttondiv)
 
