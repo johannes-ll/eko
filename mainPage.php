@@ -41,7 +41,7 @@ require 'config.php';
         </div>
     </div>
     <div class="hidden"></div>
-    <script src="app.js"></script>
+    <script src="app.js?v=1.0"></script>
     <script src="map.js" defer></script>
 </body>
 </html>

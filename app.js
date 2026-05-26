@@ -10,10 +10,13 @@ mzmap.id = "map"
 mzmap.class = "mazemap"
 document.querySelector(".hidden").appendChild(mzmap)
 
+var activities
+
 async function getEvents() {
     const response = await fetch("getEvents.php")
     const data = await response.json()
 
+    activities = data
     return data
 }
 
@@ -85,11 +88,9 @@ async function update_list(a) {
     list.replaceChildren()
 
     if (!a) {
-        a = await getEvents()
+        a = activities
         console.log("was undefined")
     }
-
-    console.log(a)
 
     a.forEach(activity => {
         const card = createActivityCard(activity)
@@ -97,12 +98,16 @@ async function update_list(a) {
     })
 }
 
-update_list()
-async function show_activity(id) {
+async function init() {
+    await getEvents()
+    update_list()
+}
 
+init()
+
+async function show_activity(id) {
     document.querySelector("header").style.display = "none"
 
-    const activities = await getEvents()
 
     const activity = activities.find(item => item.id == id)
 
@@ -138,8 +143,6 @@ async function show_activity(id) {
     fetch(`getWeather.php?lat=${activity.latitude}&lon=${activity.longitude}&time=${isoString}`)
         .then(r => r.json())
         .then(data => {
-            console.log(data)
-
             temp.textContent =
                 `${getWeatherEmoji(data.code)} ${data.temp}`
         })
@@ -190,7 +193,7 @@ async function show_activity(id) {
     buttondiv.appendChild(button)
     buttondiv.appendChild(backButton)
 
-    fetch(`get_delete_button.php?authorId=${activity.userid}`)
+    fetch(`get_delete_button.php?authorId=${activity.userid}&eventID=${activity.id}`)
         .then(response => response.text())
         .then(html => {
 
@@ -229,11 +232,10 @@ async function show_activity(id) {
 // vi vill söka efter varje input, köra update_list() med vår filtrerade lista
 document.querySelector("#search").addEventListener("input", (e) => {
     const searchText = e.target.value.toLowerCase().trim()
-
     const filteredActivities = activities.filter(activity => {
         return activity.title.toLowerCase().includes(searchText) ||
-               activity.location.toLowerCase().includes(searchText) ||
-               activity.description.toLowerCase().includes(searchText)
+               activity.adress.toLowerCase().includes(searchText) ||
+               activity.info.toLowerCase().includes(searchText)
     })
 
     update_list(filteredActivities)
