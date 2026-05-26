@@ -17,7 +17,7 @@ require 'config.php';
 <body>
     <div class="c">
         <header>
-            <h1>Fly Från Eko</h1>
+            <h1>Fly Från Eko </h1> <h2> Välkommen <?php echo $_SESSION['username']; ?></h2>
             
             <div>
                 <a href="profile.php">Din profil</a>
@@ -41,7 +41,7 @@ require 'config.php';
         </div>
     </div>
     <div class="hidden"></div>
-    <script src="app.js?v=1.0"></script>
+    <script src="app.js"></script>
     <script src="map.js" defer></script>
 </body>
 </html>
