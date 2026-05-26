@@ -65,9 +65,9 @@
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" id="email" placeholder="john@smith.com" required>
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password" placeholder="Enter a password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
+                <input type="password" name="password" id="password" placeholder="Enter a password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one symbol, one lowercase letter and one uppercase letter">
                 <label for="confirm_password">Confirm Password:</label>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one symbol, one lowercase letter and one uppercase letter">
                 <input type="submit" value="Sign up">
                  Already Have An Account?<a href="index.php"> Log in here!</a>
             </form>

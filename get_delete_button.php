@@ -5,6 +5,7 @@ Om användaren är admin eller är författaren, visas delete-knappen. Annars vi
 session_start();
 
 $authorId = $_GET['authorId'];
+$eventID = $_GET['eventID'];
 
 if (
     isset($_SESSION['role'], $_SESSION['user_id']) &&
@@ -14,5 +15,5 @@ if (
     )
 ) {
 
-    echo '<button class="delete-btn">Delete</button>';
+    echo '<button class="delete-btn" onclick="if(confirm(\'Är du säker på att du vill ta bort detta event?\')) { window.location.href=\'deleteEvent.php?id=' . $eventID . '\'; }">Delete</button>';
 }

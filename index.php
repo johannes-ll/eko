@@ -48,7 +48,7 @@
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" placeholder="Username" required minlength="4">
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one lowercase letter and one uppercase letter">
+                <input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-zåäö])(?=.*[A-ZÅÄÖ]).{8,}" required title="Must contain at least one numeric value, one symbol, one lowercase letter and one uppercase letter">
                 <input type="submit" value="Log in">
                 Don't Have An Account? <a href="createAccount.php">Sign up here!</a>
             </form>

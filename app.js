@@ -190,7 +190,7 @@ async function show_activity(id) {
     buttondiv.appendChild(button)
     buttondiv.appendChild(backButton)
 
-    fetch(`get_delete_button.php?authorId=${activity.userid}`)
+    fetch(`get_delete_button.php?authorId=${activity.userid}&eventID=${activity.id}`)
         .then(response => response.text())
         .then(html => {
 
