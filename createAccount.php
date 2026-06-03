@@ -17,6 +17,8 @@
         $userCheck = $pdo->prepare("SELECT COUNT(*) FROM User WHERE username = :username COLLATE NOCASE");
         $userCheck->execute([':username' => $username]);
         $userExists = $userCheck->fetchColumn();
+        // Kollar om lösenordet och bekräftelselösenordet matchar
+        if ($_POST['password'] == $_POST['confirm_password']){
         // Om e-post eller användarnamn redan finns sätts ett felmeddelande. Om inte så skapas användaren och sessionen startas.
         if ($emailExists > 0) {
             $error = "Email already in use";
@@ -38,7 +40,10 @@
                 $error = "Something went wrong with the database.";
             }
         }
+    } else {
+        $error = "Passwords do not match.";
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
